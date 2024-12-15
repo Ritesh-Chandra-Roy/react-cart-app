@@ -1,0 +1,34 @@
+# Node.js
+node_modules/
+
+# Environment variables
+.env
+
+# OS-specific files
+.DS_Store
+
+# Build output
+build/
+dist/
+
+# Coverage reports
+coverage/
+
+# Log files
+npm-debug.log
+yarn-error.log
+
+# IDE configuration
+.vscode/
+.idea/
+
+# Cache files
+.cache/
+
+# Temporary editor files
+*.bak
+*.swp
+*.swo
+
+# ESLint cache
+.eslintcache
