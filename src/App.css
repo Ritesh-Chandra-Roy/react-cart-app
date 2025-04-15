@@ -20,7 +20,7 @@
 
 .heading {
     font-size: 1.5em;
-    color: #333;
+    color: inherit;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -140,7 +140,7 @@
 .total-amount {
     text-align: right;
     font-size: 1.3em;
-    color: #333;
+    color: inherit;
     margin-top: 20px;
 }
 
