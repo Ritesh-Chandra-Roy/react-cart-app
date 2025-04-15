@@ -98,7 +98,8 @@ const CartPage = () => {
                 <button
                   className="quantity-btn"
                   onClick={() =>
-                    dispatch({ type: "DECREASE_QUANTITY", payload: item })
+                    item.quantity > 1 ? dispatch({ type: "DECREASE_QUANTITY", payload: item }) :
+                     dispatch({ type: "REMOVE_FROM_CART", payload: item })
                   }
                 >
                   -
