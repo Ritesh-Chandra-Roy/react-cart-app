@@ -137,7 +137,15 @@
     font-size: 1.2em;
 }
 
+.amount-wrapper {
+    position: relative;
+    padding: 1rem;
+}
+
 .total-amount {
+    position: absolute;
+    right: 0rem;
+    bottom: 0rem;
     text-align: right;
     font-size: 1.3em;
     color: inherit;
