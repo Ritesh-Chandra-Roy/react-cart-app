@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { Box, Card, Button } from '@mui/material';
+import { Box, Card, CardContent, CardActions, Button, Typography, IconButton } from '@mui/material';
 import { AddBox, RemoveCircle, Delete } from '@mui/icons-material';
 import "./App.css";
 
@@ -60,67 +60,70 @@ const CartPage = ({ isDarkMode, toggleDarkMode }) => {
         }}>
         {isDarkMode ? "Light Mode" : "Dark Mode"}
       </Button>
-      <h1 className="heading">Shopping Cart</h1>
-      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4}}>
-      <Card sx={{ display: 'flex', flexDirection: 'column', height: 'max-content', gap: 4}}>
-        {products.map((product) => (
-          <div key={product.id} className="product-item">
-            <span className="product-name">{product.name}</span>
-            <span className="product-price">${product.price}</span>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() =>
-                dispatch({ type: "ADD_TO_CART", payload: product })
-              }>
-              Add to Cart
-            </Button>
-          </div>
-        ))}
-      </Card>
-
-      {cart.length === 0 ? (
-        <p className="empty-cart">Your cart is empty!</p>
-      ) : (
-        <Card sx={{ display: 'flex', flexDirection: 'column', gap: 4}}>
-          {cart.map((item) => (
-            <div key={item.id} className="cart-item">
-              <span className="cart-item-name">{item.name}</span>
-              <span className="cart-item-details">
-                ${item.price} x {item.quantity}
-              </span>
-              <div className="cart-actions">
-                <button
-                  className="quantity-btn"
-                  onClick={() =>
-                    dispatch({ type: "INCREASE_QUANTITY", payload: item })
-                  }
-                >
-                  <AddBox/>
-                </button>
-                <button
-                  className="quantity-btn"
-                  onClick={() =>
-                    item.quantity > 1 ? dispatch({ type: "DECREASE_QUANTITY", payload: item }) :
-                      dispatch({ type: "REMOVE_FROM_CART", payload: item })
-                  }
-                >
-                  <RemoveCircle/>
-                </button>
-                <button
-                  className="remove-btn"
-                  onClick={() =>
-                    dispatch({ type: "REMOVE_FROM_CART", payload: item })
-                  }
-                >
-                  <Delete/>
-                </button>
-              </div>
-            </div>
+      <Typography variant="h3" align="center">Shopping Cart</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', height: 'max-content', gap: 4 }}>
+          {products.map((product) => (
+            <Card key={product.id} className="product-item">
+              <CardContent>
+                <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>{product.name}</Typography>
+                <Typography>${product.price}</Typography>
+                <CardActions>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() =>
+                      dispatch({ type: "ADD_TO_CART", payload: product })
+                    }>
+                    Add to Cart
+                  </Button>
+                </CardActions>
+              </CardContent>
+            </Card>
           ))}
-          <div className="amount-wrapper"><p className="total-amount">Total: ${totalAmount}</p></div>
-        </Card>
-      )}
+        </Box>
+
+        {cart.length === 0 ? (
+          <Typography variant="body1" color="text.secondary">Your cart is empty!</Typography>
+        ) : (
+          <Card sx={{ display: 'flex', flexDirection: 'column', gap: 4, height: 'max-content' }}>
+            <CardContent>
+              {cart.map((item) => (
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Typography sx={{ padding: 2 }} variant="h6">{item.name}</Typography>
+                  <Typography variant="body2" color="text.secondary">${item.price} x {item.quantity}</Typography>
+                  <Box>
+                    <IconButton
+                      onClick={() =>
+                        dispatch({ type: "INCREASE_QUANTITY", payload: item })
+                      }
+                      color="primary"
+                    >
+                      <AddBox />
+                    </IconButton>
+                    <IconButton
+                      onClick={() =>
+                        item.quantity > 1 ? dispatch({ type: "DECREASE_QUANTITY", payload: item }) :
+                          dispatch({ type: "REMOVE_FROM_CART", payload: item })
+                      }
+                      color="secondary"
+                    >
+                      <RemoveCircle />
+                    </IconButton>
+                    <IconButton
+                      onClick={() =>
+                        dispatch({ type: "REMOVE_FROM_CART", payload: item })
+                      }
+                    >
+                      <Delete />
+                    </IconButton>
+                  </Box>
+                </Box>
+              ))}
+              <Typography variant="body1" color="info" align="right">Total: ${totalAmount}</Typography>
+            </CardContent>
+          </Card>
+        )}
       </Box>
 
     </Box>
