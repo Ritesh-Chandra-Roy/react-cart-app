@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { Box, Card, Button } from '@mui/material';
+import { AddBox, RemoveCircle, Delete } from '@mui/icons-material';
 import "./App.css";
 
 // Reducer function for cart state management
@@ -95,7 +96,7 @@ const CartPage = ({ isDarkMode, toggleDarkMode }) => {
                     dispatch({ type: "INCREASE_QUANTITY", payload: item })
                   }
                 >
-                  +
+                  <AddBox/>
                 </button>
                 <button
                   className="quantity-btn"
@@ -104,7 +105,7 @@ const CartPage = ({ isDarkMode, toggleDarkMode }) => {
                       dispatch({ type: "REMOVE_FROM_CART", payload: item })
                   }
                 >
-                  -
+                  <RemoveCircle/>
                 </button>
                 <button
                   className="remove-btn"
@@ -112,7 +113,7 @@ const CartPage = ({ isDarkMode, toggleDarkMode }) => {
                     dispatch({ type: "REMOVE_FROM_CART", payload: item })
                   }
                 >
-                  Remove
+                  <Delete/>
                 </button>
               </div>
             </div>
