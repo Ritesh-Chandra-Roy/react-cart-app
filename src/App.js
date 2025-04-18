@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { Box, Card, CardContent, CardActions, Button, Typography, IconButton } from '@mui/material';
-import { AddBox, RemoveCircle, Delete } from '@mui/icons-material';
+import { useTheme, useMediaQuery } from '@mui/material';
+import { AddBox, RemoveCircle, Delete, Brightness4, Brightness7 } from '@mui/icons-material';
 import "./App.css";
 
 // Reducer function for cart state management
@@ -36,6 +37,8 @@ const cartReducer = (state, action) => {
 };
 
 const CartPage = ({ isDarkMode, toggleDarkMode }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // true if screen is small
   const [cart, dispatch] = useReducer(cartReducer, []);
 
   const products = [
@@ -50,17 +53,27 @@ const CartPage = ({ isDarkMode, toggleDarkMode }) => {
   );
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Button variant="outlined" onClick={toggleDarkMode}
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 , px: 2, pt: isSmallScreen ? 6 : 4,}}>
+      <IconButton variant="outlined" onClick={toggleDarkMode}
         sx={{
           position: 'absolute',
           top: '1rem',
           right: '1rem',
           zIndex: 10,
         }}>
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </Button>
-      <Typography variant="h3" align="center">Shopping Cart</Typography>
+        {!isSmallScreen && (
+          <Typography variant="body2" sx={{ mr: 1 }}>
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          </Typography>
+        )}
+        {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+      </IconButton>
+      <Typography variant={isSmallScreen ? 'h5' : 'h3'} sx={{
+        textAlign: isSmallScreen ? 'left' : 'center',
+        }}
+      >
+        Shopping Cart
+      </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', height: 'max-content', gap: 4 }}>
           {products.map((product) => (
