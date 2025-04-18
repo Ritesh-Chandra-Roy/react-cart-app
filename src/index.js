@@ -6,7 +6,7 @@ import CartPage from "./App";
 import "./App.css";
 
 const Index = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
 
     const toggleDarkMode = () => {
         setIsDarkMode(prev => !prev);
